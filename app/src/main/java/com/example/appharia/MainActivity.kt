@@ -182,7 +182,7 @@ fun Inicio(onContinueClicked: () -> Unit) {
                                 }
                             }
                             Row(modifier = Modifier.weight(1F)){
-                                Text(text = "Grado\nMedio")
+                                Text(text = "Grado\nBásico")
                             }
                         }
                         Column(
@@ -220,7 +220,7 @@ fun Inicio(onContinueClicked: () -> Unit) {
                                 }
                             }
                             Row(modifier = Modifier.weight(1F)){
-                                Text(text = "Grado\nMedio")
+                                Text(text = "Grado\nSuperior")
                             }
                         }
                     }
@@ -251,13 +251,13 @@ fun Greetings( modifier: Modifier = Modifier,
         var filled = true
         items(items = names) { name ->
             //filled = !filled
-            Greeting(name = name, filled)
+            Contenido1(name = name, filled)
         }
     }
 }
 
 @Composable
-private fun Greeting(name: String, filled: Boolean) {
+private fun Contenido1(name: String, filled: Boolean) {
     var estado = remember { mutableStateOf(false) }
 
     if ( name == "0") {
@@ -267,7 +267,7 @@ private fun Greeting(name: String, filled: Boolean) {
             ),
             modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
         ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .padding(12.dp)
                     .animateContentSize(
@@ -278,25 +278,25 @@ private fun Greeting(name: String, filled: Boolean) {
                     )
                     .fillMaxSize()
             ) {
-                Text(text = "Cableado estructurado $name")
+                Row {
 
-                IconButton(onClick = { estado.value = !estado.value }) {
-                    /*
-                    Icon(
-                        imageVector = if (estado.value) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                        contentDescription = if (estado.value) {
-                            stringResource(R.string.show_less)
-                        } else {
-                            stringResource(R.string.show_more)
-                        }
-                    )
+                    Text(text = "Cableado estructurado\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
 
-                     */
                 }
-                if (estado == true) {
-                    Text(text = "hjzv")
-                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Hemos diseñado y ordenado los cables de un aula de informática y colocado unas canaletas en unas mesas para ordenar los cables.")
+                    }
             }
+        }
+
+
         }
     } else if (name == "1") {
         Card(
@@ -305,7 +305,7 @@ private fun Greeting(name: String, filled: Boolean) {
             ),
             modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
         ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .padding(12.dp)
                     .animateContentSize(
@@ -316,18 +316,32 @@ private fun Greeting(name: String, filled: Boolean) {
                     )
                     .fillMaxSize()
             ) {
-                Text(text = "Diseño de página web $name")
+                Row {
 
+                    Text(text = "Diseño de página web\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.")
+                    }
+                }
             }
-        }
-    } else if (name == "2") {
+    } }
+        else if (name == "2") {
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primary
             ),
             modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
         ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .padding(12.dp)
                     .animateContentSize(
@@ -338,8 +352,22 @@ private fun Greeting(name: String, filled: Boolean) {
                     )
                     .fillMaxSize()
             ) {
-                Text(text = "Elaboración de juegos $name")
+                Row {
 
+                    Text(text = "Elaboración de juegos\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Empezaremos a aprender a programar juegos sencillos como el juego de la serpiente, 2048, etc.")
+                    }
+                }
             }
         }
     } else if (name == "3") {
@@ -349,7 +377,7 @@ private fun Greeting(name: String, filled: Boolean) {
             ),
             modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
         ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .padding(12.dp)
                     .animateContentSize(
@@ -360,8 +388,22 @@ private fun Greeting(name: String, filled: Boolean) {
                     )
                     .fillMaxSize()
             ) {
-                Text(text = "Montaje de equipo $name")
+                Row {
 
+                    Text(text = "Montaje de equipo\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Vamos a aprender a montar y desmontar equipos y saber cada parte de él, así como disco duro, memoria RAM, etc.")
+                    }
+                }
             }
         }
     } else if (name == "4") {
@@ -371,7 +413,7 @@ private fun Greeting(name: String, filled: Boolean) {
             ),
             modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
         ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .padding(12.dp)
                     .animateContentSize(
@@ -382,8 +424,22 @@ private fun Greeting(name: String, filled: Boolean) {
                     )
                     .fillMaxSize()
             ) {
-                Text(text = "Diseño de red $name")
+                Row {
 
+                    Text(text = "Diseño de red\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Hemos creado y manipulado ordenadores, routers, switch, etc.")
+                    }
+                }
             }
         }
     } else {
@@ -393,7 +449,7 @@ private fun Greeting(name: String, filled: Boolean) {
             ),
             modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
         ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .padding(12.dp)
                     .animateContentSize(
@@ -404,63 +460,26 @@ private fun Greeting(name: String, filled: Boolean) {
                     )
                     .fillMaxSize()
             ) {
-                Text(text = "Formación en centros de trabajo $name")
+                Row {
 
+                    Text(text = "Formación en centros de trabajo\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Vamos a estar 2 meses y medio trabajando en empresas para obtener experiencia laboral.")
+                    }
+                }
             }
         }
     }
-
-
-    /*Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary
-        ),
-        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(12.dp)
-                .animateContentSize(
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessLow
-                    )
-                )
-        ) {
-            Text(text = "dfg $name")
-
-
-     */
-            /*Column(modifier = Modifier
-                .weight(1f, filled)
-                .padding(12.dp)) {
-                Text(text = "Hello, ")
-                Text(text = name, style = MaterialTheme.typography.bodyMedium.copy(
-                    fontWeight = FontWeight.ExtraBold
-                ))
-                if (estado.value) {
-                    Text(modifier = Modifier.padding(10.dp),
-                        text = "Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum Corem ipsum ")
-                }
-            }
-            */
-
-            /*IconButton(onClick = { estado.value = !estado.value }) {
-                Icon(
-                    imageVector = if (estado.value) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
-                    contentDescription = if (estado.value) {
-                        stringResource(R.string.show_less)
-                    } else {
-                        stringResource(R.string.show_more)
-                    }
-                )
-            }
-
-             */
-
-
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -468,24 +487,25 @@ fun PantallaFPbasica(onContinueClicked: () -> Unit) {
     var VerMenu by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
-
+            // Ajusta el padding para aumentar la altura del TopAppBar
             CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    containerColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
                     Text(
-                        "fp",
+                        "FP Básico",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 navigationIcon = {
+                    // Ajusta el tamaño del logo y su margen utilizando el modificador Modifier
                     IconButton(
-                        onClick = {  },
+                        onClick = { },
                         modifier = Modifier
                             .size(90.dp)
-                            .padding(8.dp)
+                            .padding(8.dp) // Puedes ajustar los valores según tus necesidades
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.logo_ies_haria),
@@ -494,37 +514,291 @@ fun PantallaFPbasica(onContinueClicked: () -> Unit) {
                         )
                     }
                 },
-                    actions = {
-                        IconButton(onClick = { VerMenu = !VerMenu }) {
-                            Icon(
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = "menú")
-                        }
-                        DropdownMenu(
-                            expanded = VerMenu,
-                            onDismissRequest = { VerMenu = false }) {
-                            DropdownMenuItem(
-                                text = { Text(text = "Fp basico")},
-                                onClick = { onContinueClicked() })
-                            DropdownMenuItem(
-                                text = { Text(text = "Fp Medio")},
-                                onClick = { onContinueClicked() })
-                            DropdownMenuItem(
-                                text = { Text(text = "Fp Superior")},
-                                onClick = { onContinueClicked() })
+                actions = {
+                    IconButton(onClick = { VerMenu = !VerMenu }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "menú"
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = VerMenu,
+                        onDismissRequest = { VerMenu = false }) {
+                        DropdownMenuItem(
+                            text = { Text(text = "Inicio") },
+                            onClick = { onContinueClicked() })
+                        DropdownMenuItem(
+                            text = { Text(text = "Fp Medio") },
+                            onClick = { onContinueClicked() })
+                        DropdownMenuItem(
+                            text = { Text(text = "Fp Superior") },
+                            onClick = { onContinueClicked() })
                     }
                 }
             )
         },
         content = { innerPadding ->
-            LazyColumn(
-                contentPadding = innerPadding,
+            Column(
+                modifier = Modifier.padding(innerPadding),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Contenido de la columna
+                Row(
+                    Modifier
+                        .background(Color.White)
+                        .width(400.dp)
+                        .height(5.dp)
+                ) {
+
+                }
+                Row(
+                    Modifier
+                        .background(MaterialTheme.colorScheme.tertiary)
+                        .width(400.dp)
+                        .height(200.dp)
+
+                ) {
+                    Column(
+                        modifier = Modifier.weight(1F),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Row(
+                            modifier = Modifier.paddingFromBaseline(
+                                top = 40.dp,
+
+                                )
+                        ) {
+                            IconButton(
+                                onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
+                                modifier = Modifier.size(75.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.inicio),
+                                    contentDescription = "Logo inicio",
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.weight(1F)) {
+                            Text(text = "Inicio")
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.weight(1F),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Row(
+                            modifier = Modifier.paddingFromBaseline(
+                                top = 40.dp
+                            )
+                        ) {
+                            IconButton(
+                                onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
+                                modifier = Modifier.size(75.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.fpm),
+                                    contentDescription = "Logo medio",
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.weight(1F)) {
+                            Text(text = "Grado\nMedio")
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.weight(1F),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Row(
+                            modifier = Modifier.paddingFromBaseline(
+                                top = 40.dp
+                            )
+                        ) {
+                            IconButton(
+                                onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
+                                modifier = Modifier.size(75.dp)
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.fps),
+                                    contentDescription = "Logo superior",
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.weight(1F)) {
+                            Text(text = "Grado\nSuperior")
+                        }
+                    }
+                }
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                )
+                {
+                    Greetings()
+                }
             }
         }
     )
+}
+
+/*
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun app(){
+    Scaffold(
+        topBar = {
+            // Ajusta el padding para aumentar la altura del TopAppBar
+            CenterAlignedTopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                ),
+                title = {
+                    Text(
+                        "Inicio",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                navigationIcon = {
+                    // Ajusta el tamaño del logo y su margen utilizando el modificador Modifier
+                    IconButton(
+                        onClick = { },
+                        modifier = Modifier
+                            .size(90.dp)
+                            .padding(8.dp) // Puedes ajustar los valores según tus necesidades
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.logo_ies_haria),
+                            contentDescription = "Logo iesHaría",
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = { VerMenu = !VerMenu }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "menú"
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = VerMenu,
+                        onDismissRequest = { VerMenu = false }) {
+                        DropdownMenuItem(
+                            text = { Text(text = "Fp basico") },
+                            onClick = { onContinueClicked() })
+                        DropdownMenuItem(
+                            text = { Text(text = "Fp Medio") },
+                            onClick = { onContinueClicked() })
+                        DropdownMenuItem(
+                            text = { Text(text = "Fp Superior") },
+                            onClick = { onContinueClicked() })
+                    }
+                }
+            )
+        },
+        content = { innerPadding ->
+            Column(
+                modifier = Modifier.padding(innerPadding),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Row(
+                    Modifier
+                        .background(Color.White)
+                        .width(400.dp)
+                        .height(5.dp)
+                ){
+
+                }
+                Row(
+                    Modifier
+                        .background(MaterialTheme.colorScheme.tertiary)
+                        .width(400.dp)
+                        .height(200.dp)
+
+                ){
+                    Column(
+                        modifier = Modifier.weight(1F),
+                        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row(modifier = Modifier.paddingFromBaseline(
+                            top = 40.dp,
+
+                            )){
+                            IconButton(onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
+                                modifier = Modifier.size(75.dp)) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.fpb),
+                                    contentDescription = "Logo basico",
+                                    modifier = Modifier.fillMaxSize())
+                            }
+                        }
+                        Row(modifier = Modifier.weight(1F)){
+                            Text(text = "Grado\nBásico")
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.weight(1F),
+                        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row(modifier = Modifier.paddingFromBaseline(
+                            top = 40.dp
+                        )){
+                            IconButton(onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
+                                modifier = Modifier.size(75.dp)) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.fpm),
+                                    contentDescription = "Logo medio",
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.weight(1F)){
+                            Text(text = "Grado\nMedio")
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.weight(1F),
+                        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row(modifier = Modifier.paddingFromBaseline(
+                            top = 40.dp
+                        )){
+                            IconButton(onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
+                                modifier = Modifier.size(75.dp)) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.fps),
+                                    contentDescription = "Logo superior",
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.weight(1F)){
+                            Text(text = "Grado\nSuperior")
+                        }
+                    }
+                }
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally)
+                {
+                    Row {
+                        Text(text = "PROYECTOS")
+                    }
+                    Row {
+                        Greetings()
+                    }
+                }
+            }
+        }
+    )
+}
+
+@Composable
+fun Greetings2(){
+
 }
 
 
