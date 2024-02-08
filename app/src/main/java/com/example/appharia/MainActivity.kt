@@ -10,6 +10,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -62,12 +63,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppHariaTheme {
-              Myapp()
+              Pantalla(0)
 
             }
         }
     }
 }
+
+//-----------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+
 @Composable
 fun Myapp(/* modifier: Modifier = Modifier,
     //names: List<String> = listOf("World", "Compose", "Kaka", "Illojuan", "YowiVT")
@@ -77,22 +84,33 @@ fun Myapp(/* modifier: Modifier = Modifier,
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
+            Inicio()
 
-        var shouldShowOnboarding by remember { mutableStateOf(true) }
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.primary) {
-            if (shouldShowOnboarding) {
-                Inicio(onContinueClicked = { shouldShowOnboarding = false })
-            } else if(!shouldShowOnboarding){
-                PantallaFPbasica(onContinueClicked = { shouldShowOnboarding = true })
-            }
-        }
     }
 }
 
-
+//-----------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------PANTALLA DE INICIO--------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+@Composable
+fun Texto(){
+    Text("Hola")
+}
+@Composable
+fun Pantalla(num: Int){
+    if (num == 0){
+        Inicio()
+    } else if (num == 1){
+        PantallaFPbasica()
+    }
+    else {
+        Text("Error")
+    }
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Inicio(onContinueClicked: () -> Unit) {
+fun Inicio() {
     var VerMenu by remember { mutableStateOf(false) }
         Scaffold(
             topBar = {
@@ -135,13 +153,14 @@ fun Inicio(onContinueClicked: () -> Unit) {
                             onDismissRequest = { VerMenu = false }) {
                             DropdownMenuItem(
                                 text = { Text(text = "Fp basico") },
-                                onClick = { onContinueClicked() })
+                                onClick = { Pantalla(num = 1) }
+                            )
                             DropdownMenuItem(
                                 text = { Text(text = "Fp Medio") },
-                                onClick = { onContinueClicked() })
+                                onClick = {  })
                             DropdownMenuItem(
                                 text = { Text(text = "Fp Superior") },
-                                onClick = { onContinueClicked() })
+                                onClick = {  })
                         }
                     }
                 )
@@ -232,7 +251,7 @@ fun Inicio(onContinueClicked: () -> Unit) {
                             Text(text = "PROYECTOS")
                         }
                         Row {
-                            Greetings()
+                            ScrollInicio()
                         }
                     }
                 }
@@ -241,7 +260,7 @@ fun Inicio(onContinueClicked: () -> Unit) {
 }
 
 @Composable
-fun Greetings( modifier: Modifier = Modifier,
+fun ScrollInicio( modifier: Modifier = Modifier,
     //names: List<String> = listOf("World", "Compose", "Kaka", "Illojuan", "YowiVT")
                names: List<String> = List(6) { "$it" }) {
     LazyColumn(modifier = modifier
@@ -251,13 +270,13 @@ fun Greetings( modifier: Modifier = Modifier,
         var filled = true
         items(items = names) { name ->
             //filled = !filled
-            Contenido1(name = name, filled)
+            ContenidoInicio(name = name, filled)
         }
     }
 }
 
 @Composable
-private fun Contenido1(name: String, filled: Boolean) {
+private fun ContenidoInicio(name: String, filled: Boolean) {
     var estado = remember { mutableStateOf(false) }
 
     if ( name == "0") {
@@ -481,9 +500,14 @@ private fun Contenido1(name: String, filled: Boolean) {
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------PANTALLA DE FPBASICA-------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------------------
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PantallaFPbasica(onContinueClicked: () -> Unit) {
+fun PantallaFPbasica(): Unit {
     var VerMenu by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
@@ -526,13 +550,13 @@ fun PantallaFPbasica(onContinueClicked: () -> Unit) {
                         onDismissRequest = { VerMenu = false }) {
                         DropdownMenuItem(
                             text = { Text(text = "Inicio") },
-                            onClick = { onContinueClicked() })
+                            onClick = {  })
                         DropdownMenuItem(
                             text = { Text(text = "Fp Medio") },
-                            onClick = { onContinueClicked() })
+                            onClick = {  })
                         DropdownMenuItem(
                             text = { Text(text = "Fp Superior") },
-                            onClick = { onContinueClicked() })
+                            onClick = {  })
                     }
                 }
             )
@@ -639,167 +663,401 @@ fun PantallaFPbasica(onContinueClicked: () -> Unit) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 )
                 {
-                    Greetings()
+                   ScrollBasico()
                 }
             }
         }
     )
 }
 
-/*
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun app(){
-    Scaffold(
-        topBar = {
-            // Ajusta el padding para aumentar la altura del TopAppBar
-            CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                ),
-                title = {
-                    Text(
-                        "Inicio",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                navigationIcon = {
-                    // Ajusta el tamaño del logo y su margen utilizando el modificador Modifier
-                    IconButton(
-                        onClick = { },
-                        modifier = Modifier
-                            .size(90.dp)
-                            .padding(8.dp) // Puedes ajustar los valores según tus necesidades
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.logo_ies_haria),
-                            contentDescription = "Logo iesHaría",
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { VerMenu = !VerMenu }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "menú"
-                        )
-                    }
-                    DropdownMenu(
-                        expanded = VerMenu,
-                        onDismissRequest = { VerMenu = false }) {
-                        DropdownMenuItem(
-                            text = { Text(text = "Fp basico") },
-                            onClick = { onContinueClicked() })
-                        DropdownMenuItem(
-                            text = { Text(text = "Fp Medio") },
-                            onClick = { onContinueClicked() })
-                        DropdownMenuItem(
-                            text = { Text(text = "Fp Superior") },
-                            onClick = { onContinueClicked() })
-                    }
-                }
-            )
-        },
-        content = { innerPadding ->
+fun ScrollBasico( modifier: Modifier = Modifier,
+    //names: List<String> = listOf("World", "Compose", "Kaka", "Illojuan", "YowiVT")
+                  names: List<String> = List(12) { "$it" }) {
+    LazyColumn(modifier = modifier
+        .padding(vertical = 4.dp)
+        .background(MaterialTheme.colorScheme.background)
+        .fillMaxSize()) {
+        var filled = true
+        items(items = names) { name ->
+            //filled = !filled
+            ContenidoBasico(name = name, filled)
+        }
+    }
+}
+
+@Composable
+private fun ContenidoBasico(name: String, filled: Boolean) {
+    var estado = remember { mutableStateOf(false) }
+
+    if ( name == "0") {
+        Text(text = "Primer año")
+    } else if (name == "1") {
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
             Column(
-                modifier = Modifier.padding(innerPadding),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
             ) {
-                Row(
-                    Modifier
-                        .background(Color.White)
-                        .width(400.dp)
-                        .height(5.dp)
-                ){
+                Row {
+
+                    Text(text = "Ciencias Aplicadas I\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
 
                 }
-                Row(
-                    Modifier
-                        .background(MaterialTheme.colorScheme.tertiary)
-                        .width(400.dp)
-                        .height(200.dp)
-
-                ){
-                    Column(
-                        modifier = Modifier.weight(1F),
-                        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(modifier = Modifier.paddingFromBaseline(
-                            top = 40.dp,
-
-                            )){
-                            IconButton(onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
-                                modifier = Modifier.size(75.dp)) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.fpb),
-                                    contentDescription = "Logo basico",
-                                    modifier = Modifier.fillMaxSize())
-                            }
-                        }
-                        Row(modifier = Modifier.weight(1F)){
-                            Text(text = "Grado\nBásico")
-                        }
-                    }
-                    Column(
-                        modifier = Modifier.weight(1F),
-                        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(modifier = Modifier.paddingFromBaseline(
-                            top = 40.dp
-                        )){
-                            IconButton(onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
-                                modifier = Modifier.size(75.dp)) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.fpm),
-                                    contentDescription = "Logo medio",
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
-                        }
-                        Row(modifier = Modifier.weight(1F)){
-                            Text(text = "Grado\nMedio")
-                        }
-                    }
-                    Column(
-                        modifier = Modifier.weight(1F),
-                        verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                        Row(modifier = Modifier.paddingFromBaseline(
-                            top = 40.dp
-                        )){
-                            IconButton(onClick = { /*LINKKKKKKKKKKKKKKKKKKKKKKKKKS*/ },
-                                modifier = Modifier.size(75.dp)) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.fps),
-                                    contentDescription = "Logo superior",
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
-                        }
-                        Row(modifier = Modifier.weight(1F)){
-                            Text(text = "Grado\nSuperior")
-                        }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para estructurar y desplegar una página web y sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con viñetas, o imágenes y tablas de datos.")
                     }
                 }
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally)
-                {
-                    Row {
-                        Text(text = "PROYECTOS")
+            }
+        } }
+    else if (name == "2") {
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Comunicación y Sociedad I\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
                     }
-                    Row {
-                        Greetings()
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Empezaremos a aprender a programar juegos sencillos como el juego de la serpiente, 2048, etc.")
                     }
                 }
             }
         }
-    )
+    } else if (name == "3") {
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Equipos Eléctricos y Electrónicos\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Vamos a aprender a montar y desmontar equipos y saber cada parte de él, así como disco duro, memoria RAM, etc.")
+                    }
+                }
+            }
+        }
+    } else if (name == "4") {
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Instalación y mantenimiento de redes para transmisión de datos\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Hemos creado y manipulado ordenadores, routers, switch, etc.")
+                    }
+                }
+            }
+        }
+    }else if(name == "5"){
+        Text(text = "Segundo año")
+    }else if(name == "6"){
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Montaje y mantenimiento de sistemas y componentes informáticos\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Se basa en el montaje y mantenimiento de sistemas y componentes informáticos.")
+                    }
+                }
+            }
+        }
+    }
+    else if(name == "7"){
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Operaciones auxiliares para la configuración y la explotación\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Se realizan operaciones de ensamblado, operaciones de conexionado y operaciones auxiliares en el montaje y mantenimiento de equipos eléctricos y electrónicos.")
+                    }
+                }
+            }
+        }
+    }
+    else if(name == "8"){
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Formación en centros de trabajo", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Módulo donde los alumnos finalizan sus estudios en las empresas.")
+                    }
+                }
+            }
+        }
+    }
+    else if(name == "9"){
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Comunicación y sociedad II", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Se desarrolla las habilidades y destrezas lingüísticas, además de alcanzar el nivel de precisión, claridad y fluidez requeridas, para comunicarse en su entorno.")
+                    }
+                }
+            }
+        }
+    }
+    else if(name == "10"){
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Ciencias aplicadas II", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Aplicación del conocimiento científico básico a necesidades humanas y al desarrollo tecnológico.")
+                    }
+                }
+            }
+        }
+    }
+    else {
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .animateContentSize(
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+                    .fillMaxSize()
+            ) {
+                Row {
+
+                    Text(text = "Requisitos\n", modifier = Modifier.weight(1f))
+                    ElevatedButton(
+                        onClick = { estado.value = !estado.value }
+                    ) {
+                        Text(if (estado.value) "▲" else "▼")
+                    }
+
+                }
+                if (estado.value == true) {
+                    Row(modifier = Modifier.paddingFromBaseline(
+                        top = 30.dp)){
+                        Text(text = "Año: ", fontWeight = FontWeight.Bold)
+                        Text(text = "tener cumplidos quince años, o cumplirlos durante el año natural en curso, y no superar los diecisiete años de edad en el momento del acceso o durante el año natural en curso.\n")
+                    }
+                }
+            }
+        }
+    }
 }
 
-@Composable
-fun Greetings2(){
 
-}
 
 
 
