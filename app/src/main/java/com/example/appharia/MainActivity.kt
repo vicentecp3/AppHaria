@@ -1853,7 +1853,7 @@ fun PantallaFPsuperior(
                 Row(
                     Modifier
                         .background(MaterialTheme.colorScheme.tertiary)
-                        .width(400.dp)
+                        .fillMaxWidth()
                         .height(200.dp)
 
                 ) {
